@@ -43,8 +43,9 @@ transition.to = function ( obj, params )
 end
 
 transition.cancel = function( trans )
-	
+	print('entering cancel')
 	for x in ipairs( _tManager ) do
+		print('looop entering cancel')
 		if ( _tManager[x] == trans ) then
 			table.remove( _tManager, x )
 			return oCancel( trans )
@@ -70,7 +71,7 @@ transition.resume = function ( trans )
 		if ( _tManager[x] == trans ) then
 			-- new duration is
 			local newDuration = trans._duration
-
+			print('transition resume')
 			if ( trans._timeStop ~= nil ) then
 				newDuration = trans._duration - (trans._timeStop - trans._timeStart)
 			end

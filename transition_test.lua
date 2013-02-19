@@ -1,4 +1,4 @@
-require( "common.transition_pauser" )
+require( "pause-common.transition_pauser" )
 
 
 local rect = display.newRect( 10, 10, 100, 100 )

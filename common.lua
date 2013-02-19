@@ -34,6 +34,8 @@ end
 	@param group DisplayGroup to work with.
 	@param opts Table of options to apply
 		padding - vertical padding in pixels between each element.
+		width - nil
+		height - nil
 --]]
 function horizontalGroupManager( group, opts )
 
