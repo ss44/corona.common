@@ -10,9 +10,9 @@
 	
 			-- Links to the app store url which this will redirect to.
 			appStores = {
-				'ios' = ,
-				'google' = '',
-				'amazon' = ''
+				ios = '',
+				google = '',
+				amazon = ''
 			}
 			
 			-- Show the rating dialog after the app has been run at least:
@@ -21,7 +21,7 @@
 				- days: installed for days
 			rateAfter = {
 				runs = 10,
-				time = 100 seconds,
+				time = 100,
 				days = 10
 			}
 			...
