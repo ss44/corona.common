@@ -17,6 +17,7 @@ function init( productListTable )
 		store.init( "google", transactionCallbackGoogle )
 	elseif ( system.getInfo('platformName') == "iPhone OS" ) then
 		store.init( "apple", transactionCallbackApple )
+		-- store.loadProducts( )
 	end
 
 end
@@ -109,8 +110,6 @@ function setFullVersion()
 	-- create a file with our device hash in it.
 	file:write( getDeviceHash() )
 	file:close()
-
-	Runtime:dispatchEvent( { name = "iap", phase ="purchased"} )
 end
 
 function getDeviceHash()
@@ -131,17 +130,23 @@ function transactionCallbackApple( event )
         print("receipt", transaction.receipt)
         print("transactionIdentifier", transaction.identifier)
         print("date", transaction.date)
+        setFullVersion()
+        Runtime:dispatchEvent( { name = "iap", phase ="purchased"} )
     elseif  transaction.state == "restored" then
         print("Transaction restored (from previous session)")
-
+ 		setFullVersion()
+		Runtime:dispatchEvent( { name = "iap", phase ="restored"} )
     elseif transaction.state == "cancelled" then
         print("User cancelled transaction")
+       	Runtime:dispatchEvent( { name = "iap", phase ="cancelled"} )
 
     elseif transaction.state == "failed" then
         print("Transaction failed, type:", transaction.errorType, transaction.errorString)
-
+		Runtime:dispatchEvent( { name = "iap", phase ="failed", message = transaction.errorString } )
     else
         print("unknown event")
+       	Runtime:dispatchEvent( { name = "iap", phase ="failed"} )
+
     end
 
     -- Once we are done with a transaction, call this to tell the store
